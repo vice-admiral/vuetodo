@@ -14,12 +14,13 @@
 							>&#x2714;</span>
 						</li>
 					</ul>-->
+					<hr />
 					<ul class="list-group list-group-flush">
 						<li v-for="item in finishedTasks" class="list-group-item list-group-item-success">
 							{{ item.title }}
-							<span style="cursor:pointer">
+							<span style="cursor:pointer" class="float-right">
 								<svg
-									class="bi bi-check-circle float-right"
+									class="bi bi-check-circle"
 									width="1em"
 									height="1em"
 									viewBox="0 0 16 16"
@@ -38,7 +39,11 @@
 							</span>
 						</li>
 					</ul>
-
+					<p>
+						{{ length }}
+						<span v-if="length<=1">item</span>
+						<span v-else>items</span> left
+					</p>
 					<app-header></app-header>
 				</div>
 			</div>
@@ -49,6 +54,11 @@
 <script>
 	import Header from "./Header";
 	export default {
+		data() {
+			return {
+				length: this.$store.getters.getFinishedTaskLen
+			};
+		},
 		computed: {
 			finishedTasks() {
 				return this.$store.getters.getFinishedTasks;
@@ -63,6 +73,10 @@
 <style scoped>
 	.box {
 		box-shadow: 10px 10px 10px #c5ccdb;
+		border-radius: 0.5rem;
+	}
+	.card {
+		border-radius: 0.5rem;
 	}
 
 	h1 {

@@ -5,10 +5,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    tasks: [
-      { id: 1, title: "Jogging", isDone: false },
-      { id: 2, title: "Grocery", isDone: false }
-    ],
+    tasks: [],
     finishedTasks: []
   },
   getters: {
@@ -20,15 +17,20 @@ export const store = new Vuex.Store({
     },
     getActiveLen: state => {
       return state.tasks.length;
-    }
+    },
+    getFinishedTaskLen: state => {
+      return state.finishedTasks.length;
+    },
   },
   mutations: {
     initStore: state => {
+      // localStorage.removeItem('tasks');
+      // localStorage.removeItem('finished');
       if (localStorage.getItem("tasks")) {
         state.tasks = JSON.parse(localStorage.getItem("tasks"));
       }
       if (localStorage.getItem("finished")) {
-        state.finishedTasks = JSON.parse(localStorage.getItem('finished'))
+        state.finishedTasks = JSON.parse(localStorage.getItem("finished"));
       }
     },
     addTask: (state, newTask) => {
@@ -37,13 +39,19 @@ export const store = new Vuex.Store({
     addFinishedTask: (state, finishedTask) => {
       finishedTask.isDone = true;
       state.finishedTasks.push(finishedTask);
+    },
+    removeTask: (state, payload) => {
+      state.tasks.filter(item => item !== payload.id)
+    },
+    deleteTask: (state, payload) => {
+      state.finishedTasks.filter(item => item !== payload.id);
     }
   }
 });
 
 store.subscribe((mutations, state) => {
   var parsed = JSON.stringify(state.tasks);
-  var parsed2 = JSON.stringify(state.finishedTasks)
+  var parsed2 = JSON.stringify(state.finishedTasks);
   localStorage.setItem("tasks", parsed);
-  localStorage.setItem('finished', parsed2)
+  localStorage.setItem("finished", parsed2);
 });

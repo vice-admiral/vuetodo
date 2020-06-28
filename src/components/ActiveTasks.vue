@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<h1>Your Active Tasks</h1>
-		<div class="card  box">
+		<div class="card box">
 			<div class="card-body">
 				<ul class="list-group list-group-flush">
 					<li v-for="(task, index) in tasks" class="list-group-item">
@@ -13,13 +13,13 @@
 						>&#x2714;</span>
 					</li>
 				</ul>
-        <hr>
+				<hr />
 				<p>
-					{{ number }}
-					<span v-if="number<=1">item</span>
+					{{ length }}
+					<span v-if="length<=1">item</span>
 					<span v-else>items</span> left
 				</p>
-        <app-header></app-header>
+				<app-header></app-header>
 			</div>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 		data() {
 			return {
 				tasks: this.$store.getters.getActiveTasks,
-				number: this.$store.getters.getActiveLen
+				length: this.$store.getters.getActiveLen
 			};
 		},
 
@@ -54,6 +54,11 @@
 <style scoped>
 	.box {
 		box-shadow: 10px 10px 10px #c5ccdb;
+		border-radius: 0.5rem;
+	}
+
+	.card {
+		border-radius: 0.5rem;
 	}
 
 	h1 {

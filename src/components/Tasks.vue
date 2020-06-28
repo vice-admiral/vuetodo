@@ -12,20 +12,8 @@
 						placeholder="What needs to be done?"
 					/>
 					<div class="input-group-append">
-						<button class="btn btn-dark shadow-none" type="button" id="button-addon2" @click="addTask">
-							<svg
-								class="bi bi-plus-square-fill"
-								width="1em"
-								height="1em"
-								viewBox="0 0 16 16"
-								fill="currentColor"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
-								/>
-							</svg>
+						<button class="btn shadow-none" type="button" @click="addTask">
+							<span>&#x271A;</span>
 						</button>
 					</div>
 				</div>
@@ -35,18 +23,22 @@
 
 				<ul class="list-group list-group-flush">
 					<li v-for="(task, index) in tasks" class="list-group-item">
+						<span class="float-right" style="cursor: pointer" @click="removeTask(index)">&#x2716;</span>
+						<span class="float-right" style="cursor: pointer" @click="finishedTask(index)">&#x2714;</span>
 						{{ task.title }}
-						<span
-							class="float-right"
-							style="cursor: pointer"
-							@click="finishedTask(index)"
-						>&#x2714;</span>
 					</li>
 					<hr />
 					<li
 						v-for="(task, index) in finishedTasks"
 						class="list-group-item finished-item list-group-item-success"
-					>{{ task.title }}</li>
+					>
+						{{ task.title }}
+						<span
+							class="float-right"
+							style="cursor: pointer"
+							@click="deleteTask(index)"
+						>&#x2716;</span>
+					</li>
 				</ul>
 				<app-header></app-header>
 			</div>
@@ -81,7 +73,7 @@
 				this.task = arr.join("");
 
 				const newTask = {
-					id: this.id++,
+					id: this.tasks.length,
 					title: this.task,
 					isDone: false
 				};
@@ -92,13 +84,15 @@
 			finishedTask(index) {
 				const a = this.tasks.splice(index, 1);
 				this.$store.commit("addFinishedTask", a[0]);
+			},
+			removeTask(index) {
+				const a = this.tasks.splice(index, 1);
+				this.$store.commit("removeTask", a[0]);
+			},
+			deleteTask(index) {
+				const b = this.finishedTasks.splice(index, 1);
+				this.$store.commit("deleteTask", b[0]);
 			}
-		},
-		mounted() {
-			this.tasks = this.$store.getters.getActiveTasks;
-			console.log("mounted");
-			
-			console.log(this.tasks);
 		},
 		components: {
 			appHeader: Header
@@ -130,5 +124,15 @@
 
 	.box {
 		box-shadow: 10px 10px 10px #c5ccdb;
+		border-radius: 0.5rem;
+	}
+
+	.btn {
+		background: #fcf3de;
+		color: #a3978d;
+	}
+
+	.card {
+		border-radius: 0.5rem;
 	}
 </style>
