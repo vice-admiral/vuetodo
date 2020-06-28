@@ -13,6 +13,7 @@
 						>&#x2714;</span>
 					</li>
 				</ul>
+        <hr>
 				<p>
 					{{ number }}
 					<span v-if="number<=1">item</span>

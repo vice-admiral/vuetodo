@@ -4,7 +4,13 @@
 			<div class="card-body">
 				<div class="alert alert-danger" role="alert" v-if="isInputEmpty">You must enter a task</div>
 				<div class="input-group mb-3">
-					<input class="form-control shadow-none" type="text" v-model="task" @keyup.enter="addTask" />
+					<input
+						class="form-control shadow-none"
+						type="text"
+						v-model="task"
+						@keyup.enter="addTask"
+						placeholder="What needs to be done?"
+					/>
 					<div class="input-group-append">
 						<button class="btn btn-dark shadow-none" type="button" id="button-addon2" @click="addTask">
 							<svg
@@ -36,6 +42,7 @@
 							@click="finishedTask(index)"
 						>&#x2714;</span>
 					</li>
+					<hr />
 					<li
 						v-for="(task, index) in finishedTasks"
 						class="list-group-item finished-item list-group-item-success"
@@ -87,6 +94,12 @@
 				this.$store.commit("addFinishedTask", a[0]);
 			}
 		},
+		mounted() {
+			this.tasks = this.$store.getters.getActiveTasks;
+			console.log("mounted");
+			
+			console.log(this.tasks);
+		},
 		components: {
 			appHeader: Header
 		}
@@ -94,6 +107,11 @@
 </script>
 
 <style scoped>
+	::placeholder {
+		font-family: cursive;
+		color: lightgray;
+	}
+
 	p {
 		font-family: cursive;
 	}
