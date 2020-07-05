@@ -1,22 +1,36 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-md-6 col-sm-6 app-div">
-				<router-view></router-view>
-			</div>
+	<div>
+		<app-header></app-header>
+		<div class="row justify-content-md-center align-items-start">
+			<router-view></router-view>
 		</div>
 	</div>
 </template>
 
 <script>
+	import Header from "./components/Header";
+	export default {
+		components: {
+			appHeader: Header
+		}
+	};
 </script>
 
 <style>
 	body {
-		padding: 30px;
-		background: #fcf3de;
+		padding: 0;
+		background: #f3d2c1;
 	}
-	.app-div {
-		margin: auto;
+
+	@media (max-width: 320px) {
+		body {
+			background: black;
+		}
+	}
+
+	@media (max-width: 768px) {
+		* {
+			font-size: 12px;
+		}
 	}
 </style>

@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
     },
     getFinishedTaskLen: state => {
       return state.finishedTasks.length;
-    },
+    }
   },
   mutations: {
     initStore: state => {
@@ -35,16 +35,27 @@ export const store = new Vuex.Store({
     },
     addTask: (state, newTask) => {
       state.tasks.push(newTask);
+      console.log(newTask);
+      
+      
     },
     addFinishedTask: (state, finishedTask) => {
-      finishedTask.isDone = true;
+      console.log(finishedTask);
+      
       state.finishedTasks.push(finishedTask);
     },
     removeTask: (state, payload) => {
-      state.tasks.filter(item => item !== payload.id)
+      state.tasks.filter(item => item !== payload.id);
     },
     deleteTask: (state, payload) => {
       state.finishedTasks.filter(item => item !== payload.id);
+    }
+  },
+  actions: {
+    addFinishedTask({ commit }, thefinishedTask) {
+      thefinishedTask.isDone = true;
+
+      commit("addFinishedTask", thefinishedTask);
     }
   }
 });

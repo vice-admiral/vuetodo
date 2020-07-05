@@ -1,25 +1,15 @@
 <template>
-	<nav class="navbar navbar-expand-lg navbar-dark">
-		<div class="container app-nav">
-			<div class="navbar-header app-nav">
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<!-- <router-link to="/" tag="button" class="btn active" aria-pressed="true">
-						<a>All</a>
-					</router-link>-->
-					<!-- <router-link to="/active" tag="button" class="btn active" aria-pressed="true">
-						<a>Active</a>
-					</router-link>-->
-					<a>
-						<router-link to="/" class="btn active" aria-pressed="true">All</router-link>
-					</a>
-					<a>
-						<router-link to="/active" class="btn active" aria-pressed="true">Active</router-link>
-					</a>
-					<a>
-						<router-link to="/completed" class="btn active" aria-pressed="true">Completed</router-link>
-					</a>
-				</div>
-			</div>
+	<nav class="navbar">
+		<a class="navbar-brand" href="#">
+			<img src="https://cdn.onlinewebfonts.com/svg/img_550710.png" width="50" height="50" alt />
+			Todos
+		</a>
+		<div class="btn-group" role="group">
+			<router-link to="/" class="btn active">All</router-link>
+
+			<router-link to="/active" class="btn active">Active</router-link>
+
+			<router-link to="/completed" class="btn active">Completed</router-link>
 		</div>
 	</nav>
 </template>
@@ -27,18 +17,28 @@
 
 
 <style scoped>
-	a {
-		margin: 1px;
-		color: black;
+	.container {
+		padding: 0;
 	}
-	.btn {
-		background: #fcecde;
-		position: relative;
-		z-index: 1;
+	.navbar {
+		/* margin: auto; */
+		color: #172c66;
+		background: #f3d2c1;
+		margin-top: 0;
 	}
 
-	.app-nav {
-		/* background: #e3fce4 */
-		margin: auto;
+	.navbar a {
+		margin: 0;
+		padding: 0 12px;
+	}
+
+	a {
+		color: #172c66;
+		font-weight: 500;
+	}
+
+	.btn-group {
+		margin: 0;
+		color: #172c66;
 	}
 </style>

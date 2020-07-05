@@ -1,50 +1,27 @@
 <template>
-	<div>
-		<div class="container">
-			<h1>Your Completed Tasks</h1>
-			<div class="card box">
+	<div class="container">
+		<div class="row justify-content-md-center align-items-center">
+			<div class="col-sm-4 col-md-6">
 				<div class="card-body">
-					<!-- <ul class="list-group list-group-flush">
-						<li v-for="(task, index) in tasks" class="list-group-item">
-							{{ task.title }}
+					<div class="header">
+
+					<h4>Your Completed Tasks</h4>
+					<p>
+						{{ length }}
+						<span v-if="length==1">item</span>
+						<span v-else>items</span>
+					</p>
+					</div>
+					<ul class="list-group">
+						<li v-for="(item,index) in finishedTasks" class="list-group-item">
+							{{ item.title }}
 							<span
 								class="float-right"
 								style="cursor: pointer"
 								@click="deleteTask(index)"
-							>&#x2714;</span>
-						</li>
-					</ul>-->
-					<hr />
-					<ul class="list-group list-group-flush">
-						<li v-for="item in finishedTasks" class="list-group-item list-group-item-success">
-							{{ item.title }}
-							<span style="cursor:pointer" class="float-right">
-								<svg
-									class="bi bi-check-circle"
-									width="1em"
-									height="1em"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-									/>
-									<path
-										fill-rule="evenodd"
-										d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"
-									/>
-								</svg>
-							</span>
+							>&#x2716;</span>
 						</li>
 					</ul>
-					<p>
-						{{ length }}
-						<span v-if="length<=1">item</span>
-						<span v-else>items</span> left
-					</p>
-					<app-header></app-header>
 				</div>
 			</div>
 		</div>
@@ -52,43 +29,72 @@
 </template>
 
 <script>
-	import Header from "./Header";
 	export default {
-		data() {
-			return {
-				length: this.$store.getters.getFinishedTaskLen
-			};
-		},
 		computed: {
 			finishedTasks() {
 				return this.$store.getters.getFinishedTasks;
+			},
+			length() {
+				return this.$store.getters.getFinishedTaskLen;
 			}
 		},
-		components: {
-			appHeader: Header
+		methods: {
+			deleteTask(index) {
+				console.log(index);
+
+				const b = this.finishedTasks.splice(index, 1);
+				this.$store.commit("deleteTask", b[0]);
+			}
 		}
 	};
 </script>
 
 <style scoped>
-	.box {
-		box-shadow: 10px 10px 10px #c5ccdb;
-		border-radius: 0.5rem;
+	.header {
+		display: flex;
+		background: #8bd3dd;
+		padding: 10px;
+		/* justify-content: space-between; */
 	}
-	.card {
-		border-radius: 0.5rem;
+
+	.header h4 {
+		flex-grow: 4;
+		padding: 0;
+		margin: 0;
+		font-size: 1.2rem;
+		vertical-align: middle;
+	}
+
+
+	.card-body {
+		padding: 5px;
+		background: #8bd3dd;
+		color: #001858;
+		border-radius: 5px;
+		/* border: 2px solid #001858; */
 	}
 
 	h1 {
 		text-align: center;
 	}
+
 	.list-group-item {
-		font-size: 1.5rem;
-		line-height: 50px;
-		text-decoration: line-through;
+		font-weight: 500;
+		font-size: 1rem;
+		line-height: 30px;
+		padding: 0.5rem;
+		border-radius: 5px;
+		margin: 5px 5px;
+		border: none;
+		background: #8bd3dd;
 	}
 
-	svg {
-		margin: auto;
+
+
+
+	@media (max-width: 576px) {
+		* {
+			font-size: 14px;
+		}
 	}
 </style>

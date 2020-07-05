@@ -2,26 +2,12 @@
 	<div class="box">
 		<div class="card">
 			<div class="card-body">
-				<div class="alert alert-danger" role="alert" v-if="isInputEmpty">You must enter a task</div>
-				<div class="input-group mb-3">
-					<input
-						class="form-control shadow-none"
-						type="text"
-						v-model="task"
-						@keyup.enter="addTask"
-						placeholder="What needs to be done?"
-					/>
-					<div class="input-group-append">
-						<button class="btn shadow-none" type="button" @click="addTask">
-							<span>&#x271A;</span>
-						</button>
-					</div>
-				</div>
+				<app-add-task></app-add-task>
 				<div class="alert alert-success" role="alert" v-if="tasks.length <= 0">
 					<p class="mb-0">You currently have no tasks</p>
 				</div>
 
-				<ul class="list-group list-group-flush">
+				<!-- <ul class="list-group list-group-flush">
 					<li v-for="(task, index) in tasks" class="list-group-item">
 						<span class="float-right" style="cursor: pointer" @click="removeTask(index)">&#x2716;</span>
 						<span class="float-right" style="cursor: pointer" @click="finishedTask(index)">&#x2714;</span>
@@ -29,25 +15,23 @@
 					</li>
 					<hr />
 					<li
-						v-for="(task, index) in finishedTasks"
+						v-for="(task, index) in finishedTasks.slice().reverse()"
 						class="list-group-item finished-item list-group-item-success"
 					>
-						{{ task.title }}
-						<span
+						{{ task.title }} -->
+						<!-- <span
 							class="float-right"
 							style="cursor: pointer"
 							@click="deleteTask(index)"
-						>&#x2716;</span>
-					</li>
-				</ul>
-				<app-header></app-header>
+						>&#x2716;</span> -->
+					<!-- </li>
+				</ul> -->
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import Header from "./Header";
 	export default {
 		data() {
 			return {
@@ -81,21 +65,18 @@
 				this.task = "";
 				this.task.focus;
 			},
-			finishedTask(index) {
-				const a = this.tasks.splice(index, 1);
-				this.$store.commit("addFinishedTask", a[0]);
-			},
-			removeTask(index) {
-				const a = this.tasks.splice(index, 1);
-				this.$store.commit("removeTask", a[0]);
-			},
-			deleteTask(index) {
-				const b = this.finishedTasks.splice(index, 1);
-				this.$store.commit("deleteTask", b[0]);
-			}
-		},
-		components: {
-			appHeader: Header
+			// finishedTask(index) {
+			// 	const a = this.tasks.splice(index, 1);
+			// 	this.$store.commit("addFinishedTask", a[0]);
+			// },
+			// removeTask(index) {
+			// 	const a = this.tasks.splice(index, 1);
+			// 	this.$store.commit("removeTask", a[0]);
+			// },
+			// deleteTask(index) {
+			// 	const b = this.finishedTasks.splice(index, 1);
+			// 	this.$store.commit("deleteTask", b[0]);
+			// }
 		}
 	};
 </script>
