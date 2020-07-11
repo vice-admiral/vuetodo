@@ -35,8 +35,7 @@ export const store = new Vuex.Store({
     },
     addTask: (state, newTask) => {
       state.tasks.push(newTask);
-      console.log(newTask);
-      
+      console.log(newTask);     
       
     },
     addFinishedTask: (state, finishedTask) => {
@@ -49,6 +48,10 @@ export const store = new Vuex.Store({
     },
     deleteTask: (state, payload) => {
       state.finishedTasks.filter(item => item !== payload.id);
+    },
+
+    deleteAll: (state) => {
+      state.finishedTasks.splice(0, state.finishedTasks.length)
     }
   },
   actions: {
@@ -56,6 +59,10 @@ export const store = new Vuex.Store({
       thefinishedTask.isDone = true;
 
       commit("addFinishedTask", thefinishedTask);
+    },
+
+    deleteAll({commit}, payload) {
+      commit('deleteAll')
     }
   }
 });

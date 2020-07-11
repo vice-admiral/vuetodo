@@ -29,7 +29,7 @@
 
 	.navbar a {
 		margin: 0;
-		padding: 0 12px;
+		padding: 0 auto;
 	}
 
 	a {
