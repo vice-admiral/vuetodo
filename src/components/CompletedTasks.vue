@@ -1,6 +1,6 @@
 <template>
   <div class="container ">
-    <div class="row justify-content-md-center align-items-center">
+    <div>
       <div class="col-sm-4 col-md-6 col-lg-12 p-1 ">
         <div class="card-body">
           <div class="header">

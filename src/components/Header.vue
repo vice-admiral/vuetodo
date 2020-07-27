@@ -1,44 +1,80 @@
 <template>
-	<nav class="navbar">
-		<a class="navbar-brand" href="#">
-			<img src="https://cdn.onlinewebfonts.com/svg/img_550710.png" width="50" height="50" alt />
-			Todos
-		</a>
-		<div class="btn-group" role="group">
-			<router-link to="/" class="btn active">All</router-link>
+  <div class="nav-bar">
+    <div>
+      <router-link to="/" class="btn active">{{date}}</router-link>
+      <p>{{getLength()}} Active Tasks</p>
+      <app-add-task></app-add-task>
+    </div>
 
-			<router-link to="/active" class="btn active">Active</router-link>
+    <div class="button-group" role="group">
+      <router-link to="/active" class="btn active">Incomplete Tasks</router-link>
 
-			<router-link to="/completed" class="btn active">Completed</router-link>
-		</div>
-	</nav>
+      <router-link to="/completed" class="btn active">Completed Tasks</router-link>
+    </div>
+  </div>
 </template>
 
+<script>
+import AddTask from "./AddTask";
 
+export default {
+  data() {
+    return {
+      date: null,
+    };
+  },
+  created() {
+    this.date = new Date().toDateString();
+    console.log("created");
+  },
+  methods: {
+    getLength() {
+      return this.$store.getters.getActiveTasks.length;
+    },
+  },
+  components: {
+    appAddTask: AddTask,
+  },
+};
+</script>
 
 <style scoped>
-	.container {
-		padding: 0;
-	}
-	.navbar {
-		/* margin: auto; */
-		color: #172c66;
-		background: #f3d2c1;
-		margin-top: 0;
-	}
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid #8d9196;
+  color: white;
+}
 
-	.navbar a {
-		margin: 0;
-		padding: 0 auto;
-	}
+.nav-bar a {
+  margin: 0;
+  color: white;
+  padding: 0 8px;
+}
 
-	a {
-		color: #172c66;
-		font-weight: 500;
-	}
+a {
+  color: #172c66;
+  font-weight: 500;
+}
 
-	.btn-group {
-		margin: 0;
-		color: #172c66;
-	}
+p {
+  padding: 0 10px;
+  font-size: 0.8rem;
+  color: #61DBFB;
+}
+
+.button-group {
+  margin: 0;
+  color: #172c66;
+  outline: none;
+}
+
+.button-group:focus {
+  outline: none;
+}
+
+.add-task {
+  padding: 12px 0px 0px 6px;
+}
 </style>

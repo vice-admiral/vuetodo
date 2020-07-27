@@ -1,11 +1,18 @@
 <template>
   <div class="container">
-    <h1>Todos</h1>
-    <div class="row m-2">
+    <!-- <div class="row m-2">
       <div class="col-lg-6 col-sm-6 col-md-12 p-0">
         <app-active-tasks></app-active-tasks>
       </div>
       <div class="col-lg-6 col-sm-6 col-md-12  p-0">
+        <app-completed></app-completed>
+      </div>
+    </div> -->
+      <div class="parent">
+      <div class="child">
+        <app-active-tasks></app-active-tasks>
+      </div>
+      <div class="child">
         <app-completed></app-completed>
       </div>
     </div>
@@ -50,6 +57,20 @@ h1 {
   h1 {
     font-size: 3rem;
     color: #001858;
+  }
+
+  .parent {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .child {
+    flex: 0 1 300px;
+
+  border: 1px solid red;
+  /* background: lightpink; */
+  font-size: 2rem;
+  text-align: center;
   }
 }
 </style>

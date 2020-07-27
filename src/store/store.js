@@ -35,12 +35,9 @@ export const store = new Vuex.Store({
     },
     addTask: (state, newTask) => {
       state.tasks.push(newTask);
-      console.log(newTask);     
-      
+
     },
     addFinishedTask: (state, finishedTask) => {
-      console.log(finishedTask);
-      
       state.finishedTasks.push(finishedTask);
     },
     removeTask: (state, payload) => {
@@ -61,7 +58,7 @@ export const store = new Vuex.Store({
       commit("addFinishedTask", thefinishedTask);
     },
 
-    deleteAll({commit}, payload) {
+    deleteAll({ commit }, payload) {
       commit('deleteAll')
     }
   }
