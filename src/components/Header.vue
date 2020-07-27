@@ -1,7 +1,7 @@
 <template>
   <div class="nav-bar">
     <div>
-      <router-link to="/" class="btn active">{{date}}</router-link>
+      <router-link to="/active" class="btn active">{{date}}</router-link>
       <p>{{getLength()}} Active Tasks</p>
       <app-add-task></app-add-task>
     </div>
