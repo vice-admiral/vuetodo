@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
       <div class="parent">
       <div class="child">
         <app-active-tasks></app-active-tasks>

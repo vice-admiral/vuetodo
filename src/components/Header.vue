@@ -1,15 +1,15 @@
 <template>
   <div class="nav-bar">
     <div>
-      <router-link to="/active" class="btn active">{{date}}</router-link>
+      <router-link to="/active" class="active">{{date}}</router-link>
       <p>{{getLength()}} Active Tasks</p>
       <app-add-task></app-add-task>
     </div>
 
     <div class="button-group" role="group">
-      <router-link to="/active" class="btn active">Incomplete Tasks</router-link>
+      <router-link to="/active" class="link" >Incomplete Tasks</router-link>
 
-      <router-link to="/completed" class="btn active">Completed Tasks</router-link>
+      <router-link to="/completed" class="link" >Completed Tasks</router-link>
     </div>
   </div>
 </template>
@@ -21,16 +21,19 @@ export default {
   data() {
     return {
       date: null,
+      links: [],
     };
   },
   created() {
     this.date = new Date().toDateString();
-    console.log("created");
+    this.links = document.getElementsByClassName("link");
   },
   methods: {
     getLength() {
       return this.$store.getters.getActiveTasks.length;
     },
+
+  
   },
   components: {
     appAddTask: AddTask,
@@ -47,21 +50,31 @@ export default {
   color: white;
 }
 
-.nav-bar a {
+/* .nav-bar a {
   margin: 0;
   color: white;
   padding: 0 8px;
+  text-decoration: none;
+} */
+
+.active {
+  margin: 0;
+  color: white;
+  padding: 0 8px;
+  text-decoration: none;
 }
 
-a {
-  color: #172c66;
-  font-weight: 500;
+.link {
+  margin: 0;
+  color: #8d9196;
+  padding: 0 8px;
+  text-decoration: none;
 }
 
 p {
-  padding: 0 10px;
+  padding: 0 8px;
   font-size: 0.8rem;
-  color: #61DBFB;
+  color: #61dbfb;
 }
 
 .button-group {
@@ -76,5 +89,10 @@ p {
 
 .add-task {
   padding: 12px 0px 0px 6px;
+}
+
+.router-link-active {
+  text-decoration: none;
+  color: white !important;
 }
 </style>
